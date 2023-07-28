@@ -1,7 +1,6 @@
-/* eslint-disable no-undef */
 export default {
-  mounted() {
-    el.focus();
-  },
-  name: 'focus',
-};
+    mounted(el) {
+        el.focus()
+    },
+    name: 'focus'
+}

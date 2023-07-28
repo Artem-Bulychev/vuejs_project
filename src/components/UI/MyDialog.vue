@@ -1,23 +1,24 @@
 <template>
-
-<form @click.stop="hideDialog" class="dialog" v-if="show" v-on:keyup.enter="submit">
-  <div @click.stop class="dialog__content">
-    <slot></slot>
+  <div class="dialog" v-if="show" @click.stop="hideDialog">
+    <div @click.stop class="dialog__content">
+      <slot></slot>
+    </div>
   </div>
-</form>
 </template>
 
 <script>
-import toggleMixin from '@/mixins/toggleMixin';
+import toggleMixin from "@/mixins/toggleMixin";
 
 export default {
   name: 'my-dialog',
   mixins: [toggleMixin],
-};
-
+  mounted() {
+    console.log('dialog mounted')
+  }
+}
 </script>
 
-<style>
+<style scoped>
 .dialog {
   top: 0;
   bottom: 0;
@@ -27,13 +28,13 @@ export default {
   position: fixed;
   display: flex;
 }
-.dialog__content{
+
+.dialog__content {
   margin: auto;
   background: white;
   border-radius: 12px;
   min-height: 50px;
-  max-width: 400px;
+  min-width: 300px;
   padding: 20px;
 }
-
 </style>

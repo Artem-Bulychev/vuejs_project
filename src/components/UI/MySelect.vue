@@ -1,6 +1,3 @@
-<!-- eslint-disable vue/no-mutating-props -->
-<!-- eslint-disable vuejs-accessibility/form-control-has-label -->
-<!-- eslint-disable vue/valid-template-root -->
 <template>
   <select v-model="modelValue" @change="changeOption">
     <option disabled value="">Выберите из списка</option>
@@ -19,20 +16,19 @@ export default {
   name: 'my-select',
   props: {
     modelValue: {
-      type: String,
+      type: String
     },
-  },
-  option: {
-    type: Array,
-    default: () => [],
+    options: {
+      type: Array,
+      default: () => []
+    }
   },
   methods: {
     changeOption(event) {
-      this.$emit('update:modelValue', event);
-    },
-  },
-};
-
+      this.$emit('update:modelValue', event.target.value);
+    }
+  }
+}
 </script>
 
 <style scoped>

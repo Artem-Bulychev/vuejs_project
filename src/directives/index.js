@@ -1,7 +1,7 @@
-import VFocus from './VFocus';
-import Vintersection from './Vintersection';
+import VFocus from "@/directives/VFocus";
+import VIntersection from "@/directives/VIntersection";
 
-export default {
-  VFocus,
-  Vintersection,
-};
+export default [
+    VFocus,
+    VIntersection
+]

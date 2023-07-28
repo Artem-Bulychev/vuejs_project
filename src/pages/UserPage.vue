@@ -1,5 +1,3 @@
-<!-- eslint-disable import/extensions -->
-<!-- eslint-disable import/extensions -->
 <template>
   <div>
     <h1>Страница с постами</h1>
@@ -48,20 +46,19 @@
 </template>
 
 <script>
+import PostForm from "@/components/PostForm";
+import PostList from "@/components/PostList";
+import MyButton from "@/components/UI/MyButton";
 import axios from 'axios';
-import MyInput from '@/components/UI/MyInput.vue';
-import PostForm from '../components/PostForm.vue';
-import PostList from '../components/PostList.vue';
-import MyButton from '../components/UI/MyButton.vue';
-import MySelect from '../components/UI/MySelect.vue';
+import MySelect from "@/components/UI/MySelect";
+import MyInput from "@/components/UI/MyInput";
 
 export default {
   components: {
     MyInput,
     MySelect,
     MyButton,
-    PostList,
-    PostForm,
+    PostList, PostForm
   },
   data() {
     return {
@@ -74,10 +71,10 @@ export default {
       limit: 10,
       totalPages: 0,
       sortOptions: [
-        { value: 'title', name: 'По названию' },
-        { value: 'body', name: 'По содержимому' },
-      ],
-    };
+        {value: 'title', name: 'По названию'},
+        {value: 'body', name: 'По содержимому'},
+      ]
+    }
   },
   methods: {
     createPost(post) {
@@ -85,7 +82,7 @@ export default {
       this.dialogVisible = false;
     },
     removePost(post) {
-      this.posts = this.posts.filter((p) => p.id !== post.id);
+      this.posts = this.posts.filter(p => p.id !== post.id)
     },
     showDialog() {
       this.dialogVisible = true;
@@ -99,13 +96,13 @@ export default {
         const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
           params: {
             _page: this.page,
-            _limit: this.limit,
-          },
+            _limit: this.limit
+          }
         });
-        this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limit);
+        this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limit)
         this.posts = response.data;
       } catch (e) {
-        alert('Ошибка');
+        alert('Ошибка')
       } finally {
         this.isPostsLoading = false;
       }
@@ -116,16 +113,15 @@ export default {
         const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
           params: {
             _page: this.page,
-            _limit: this.limit,
-          },
+            _limit: this.limit
+          }
         });
-        this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limit);
+        this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limit)
         this.posts = [...this.posts, ...response.data];
       } catch (e) {
-        // eslint-disable-next-line no-alert
-        alert('Ошибка');
+        alert('Ошибка')
       }
-    },
+    }
   },
   mounted() {
     this.fetchPosts();
@@ -143,20 +139,18 @@ export default {
   },
   computed: {
     sortedPosts() {
-      // eslint-disable-next-line max-len
-      return [...this.posts].sort((post1, post2) => post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]));
+      return [...this.posts].sort((post1, post2) => post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]))
     },
     sortedAndSearchedPosts() {
-      // eslint-disable-next-line max-len
-      return this.sortedPosts.filter((post) => post.title.toLowerCase().includes(this.searchQuery.toLowerCase()));
-    },
+      return this.sortedPosts.filter(post => post.title.toLowerCase().includes(this.searchQuery.toLowerCase()))
+    }
   },
   watch: {
     // page() {
     //   this.fetchPosts()
     // }
-  },
-};
+  }
+}
 </script>
 
 <style>
